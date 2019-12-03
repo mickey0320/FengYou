@@ -1,0 +1,12 @@
+.top-theme {
+    width: 100%;
+    height: 260rpx;
+}
+
+.swiper-banner {
+    height: 360rpx;
+}
+.swiper-banner-item {
+    height: 360rpx;
+    width: 100%;
+}
