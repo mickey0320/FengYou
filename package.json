@@ -1,0 +1,22 @@
+{
+  "name": "fengyou",
+  "version": "0.0.1",
+  "description": "电商小程序",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "lin-ui": "~0.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mickey0320/FengYou.git"
+  },
+  "author": "yanjian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mickey0320/FengYou/issues"
+  },
+  "homepage": "https://github.com/mickey0320/FengYou#readme"
+}
