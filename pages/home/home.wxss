@@ -1,12 +1,20 @@
 .top-theme {
     width: 100%;
     height: 260rpx;
+    display: block;
 }
 
 .swiper-banner {
     height: 360rpx;
 }
+
 .swiper-banner-item {
     height: 360rpx;
     width: 100%;
+}
+
+.activity {
+    width: 100%;
+    height: 310rpx;
+    margin-top: 20rpx;
 }
