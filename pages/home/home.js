@@ -1,7 +1,7 @@
 import Theme from "../../model/theme";
 import Banner from "../../model/banner";
 import Category from "../../model/category";
-import Activity from "../../model/active";
+import Activity from "../../model/activity";
 // pages/home/home.js
 Page({
 
@@ -13,6 +13,8 @@ Page({
         bannerB: null,
         categories: [],
         activityD: null,
+        themeE: null,
+        themeESpuList: [],
     },
 
     /**
@@ -23,15 +25,22 @@ Page({
     },
 
     async initData() {
-        const themeA = await Theme.getHomeLocationA()
+        const theme = new Theme()
+        await theme.getThemes()
+        const themeA = theme.getHomeLocationA()
         const bannerB = await Banner.getHomeLocationB()
         const categories = await Category.getHomeLocationC()
-        const activityD = await Activity.getLocationD()
+        const activityD = await Activity.getHomeLocationD()
+        const themeE = await theme.getHomeLocationE()
+        const themeESpuList = await Theme.getThemeESpuList()
+        console.log(themeESpuList);
         this.setData({
-            themeA: themeA[0],
+            themeA,
             bannerB,
             categories,
             activityD,
+            themeE,
+            themeESpuList: themeESpuList.spu_list,
         })
     },
 

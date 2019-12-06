@@ -13,4 +13,9 @@
     </swiper>
     <s-category-grid categories="{{categories}}"></s-category-grid>
     <image class="activity" src="{{activityD.entrance_img}}"></image>
+    <s-spu-scroll
+            theme="{{themeE}}"
+            spu-list="{{themeESpuList}}"
+            wx:if="{{themeE.online}}">
+    </s-spu-scroll>
 </view>
