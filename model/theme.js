@@ -7,8 +7,8 @@ export default class Theme {
     static locationH = 't-4'
 
     async getThemes() {
-        const { locationA, locationE,locationF,locationG } = Theme
-        const names = `${locationA},${locationE},${locationF},${locationG}`
+        const {locationA, locationE, locationF, locationH} = Theme
+        const names = `${locationA},${locationE},${locationF},${locationH}`
         this.themes = await Http.request({
             url: 'theme/by/names',
             data: {
@@ -18,19 +18,26 @@ export default class Theme {
 
     }
 
-    getHomeLocationA(){
+    getHomeLocationA() {
         return this.themes.find(t => t.name === Theme.locationA)
     }
 
-    getHomeLocationE(){
+    getHomeLocationE() {
         return this.themes.find(t => t.name === Theme.locationE)
     }
 
-    static getThemeESpuList(){
+    getHomeLocationF() {
+        return this.themes.find(t => t.name === Theme.locationF)
+    }
+    getHomeLocationH() {
+        return this.themes.find(t => t.name === Theme.locationH)
+    }
+
+    static getThemeESpuList() {
         return Theme.getThemeSpuListByName(Theme.locationE)
     }
 
-    static getThemeSpuListByName(){
+    static getThemeSpuListByName() {
         return Http.request({
             url: `theme/name/${Theme.locationE}/with_spu`
         })

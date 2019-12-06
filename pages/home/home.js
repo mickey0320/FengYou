@@ -15,6 +15,8 @@ Page({
         activityD: null,
         themeE: null,
         themeESpuList: [],
+        bannerG: null,
+        themeH: null,
     },
 
     /**
@@ -28,19 +30,28 @@ Page({
         const theme = new Theme()
         await theme.getThemes()
         const themeA = theme.getHomeLocationA()
+        const themeF = theme.getHomeLocationF()
+        const themeE = theme.getHomeLocationE()
+        const themeH = theme.getHomeLocationH()
         const bannerB = await Banner.getHomeLocationB()
         const categories = await Category.getHomeLocationC()
         const activityD = await Activity.getHomeLocationD()
-        const themeE = await theme.getHomeLocationE()
-        const themeESpuList = await Theme.getThemeESpuList()
-        console.log(themeESpuList);
+        let themeESpuList = []
+        if(themeE.online) {
+            const spuList = await Theme.getThemeESpuList()
+            themeESpuList = spuList.spu_list.splice(0,8)
+        }
+        const bannerG = await Banner.getHomeLocationG()
         this.setData({
             themeA,
             bannerB,
             categories,
             activityD,
             themeE,
-            themeESpuList: themeESpuList.spu_list,
+            themeESpuList,
+            themeF,
+            bannerG,
+            themeH,
         })
     },
 
