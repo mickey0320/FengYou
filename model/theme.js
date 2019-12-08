@@ -37,9 +37,9 @@ export default class Theme {
         return Theme.getThemeSpuListByName(Theme.locationE)
     }
 
-    static getThemeSpuListByName() {
+    static getThemeSpuListByName(name) {
         return Http.request({
-            url: `theme/name/${Theme.locationE}/with_spu`
+            url: `theme/name/${name}/with_spu`
         })
     }
 }

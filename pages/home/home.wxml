@@ -1,24 +1,30 @@
-<view>
-    <image class="top-theme" src="{{themeA.entrance_img}}"></image>
-    <swiper class="swiper-banner"
-            indicator-dots
-            indicator-active-color="#157658"
-            autoplay
-            cicular>
-        <block wx:for="{{bannerB.items}}">
-            <swiper-item>
-                <image class="swiper-banner-item" src="{{item.img}}"></image>
-            </swiper-item>
-        </block>
-    </swiper>
-    <s-category-grid categories="{{categories}}"></s-category-grid>
-    <image class="activity" src="{{activityD.entrance_img}}"></image>
-    <s-spu-scroll
-            theme="{{themeE}}"
-            spu-list="{{themeESpuList}}"
-            wx:if="{{themeE.online}}">
-    </s-spu-scroll>
-    <image class="quality" src="{{themeF.entrance_img}}"></image>
-    <s-hot-list banner="{{bannerG}}"></s-hot-list>
-    <image class="fashion" src="{{themeH.entrance_img}}"></image>
-</view>
+<l-loadmore show type="{{loadingStatus}}">
+    <view slot="content">
+        <image class="top-theme" src="{{themeA.entrance_img}}"></image>
+        <swiper class="swiper-banner"
+                indicator-dots
+                indicator-active-color="#157658"
+                autoplay
+                cicular>
+            <block wx:for="{{bannerB.items}}">
+                <swiper-item>
+                    <image class="swiper-banner-item" src="{{item.img}}"></image>
+                </swiper-item>
+            </block>
+        </swiper>
+        <s-category-grid categories="{{categories}}"></s-category-grid>
+        <image class="activity" src="{{activityD.entrance_img}}"></image>
+        <s-spu-scroll
+                theme="{{themeE}}"
+                spu-list="{{themeESpuList}}"
+                wx:if="{{themeE.online}}">
+        </s-spu-scroll>
+        <image class="quality" src="{{themeF.entrance_img}}"></image>
+        <s-hot-list banner="{{bannerG}}"></s-hot-list>
+        <image class="fashion" src="{{themeH.entrance_img}}"></image>
+        <view class="spu-bottom">
+            <image class="title-spu-img" src="/images/home/title@interest.png"></image>
+            <l-water-flow generic:l-water-flow-item="s-spu-preview"></l-water-flow>
+        </view>
+    </view>
+</l-loadmore>

@@ -2,6 +2,7 @@ import Theme from "../../model/theme";
 import Banner from "../../model/banner";
 import Category from "../../model/category";
 import Activity from "../../model/activity";
+import SpuPager from "../../model/spu-pager";
 // pages/home/home.js
 Page({
 
@@ -17,6 +18,7 @@ Page({
         themeESpuList: [],
         bannerG: null,
         themeH: null,
+        loadingStatus: 'loading'
     },
 
     /**
@@ -24,6 +26,7 @@ Page({
      */
     onLoad: async function (options) {
         this.initData()
+        this.initBottomSpuList()
     },
 
     async initData() {
@@ -53,6 +56,15 @@ Page({
             bannerG,
             themeH,
         })
+    },
+
+    async initBottomSpuList(){
+        const result = await SpuPager.getLatest()
+        if(!result){
+            return
+        }
+
+        wx.lin.renderWaterFlow(result.data)
     },
 
     /**
@@ -93,8 +105,18 @@ Page({
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: async function () {
+        const result = await SpuPager.getLatest()
+        if(!result){
+            return
+        }
 
+        wx.lin.renderWaterFlow(result.data)
+        if(!result.hasNextPageData){
+           this.setData({
+               loadingStatus: 'end',
+           })
+        }
     },
 
     /**

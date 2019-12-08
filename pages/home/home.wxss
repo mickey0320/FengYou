@@ -19,16 +19,33 @@
     margin-top: 20rpx;
     margin-bottom: 20rpx;
 }
-.quality{
+
+.quality {
     margin-top: 20rpx;
     margin-bottom: 20rpx;
     width: 100%;
     height: 880rpx;
     display: flex;
 }
-.fashion{
+
+.fashion {
     margin-top: 20rpx;
     width: 100%;
     height: 840rpx;
     display: flex;
+}
+
+.spu-bottom{
+    margin-top: 20rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30rpx;
+    background: #fff;
+}
+
+.title-spu-img {
+    width: 690rpx;
+    height: 70rpx;
+    margin-bottom: 38rpx;
 }
