@@ -32,6 +32,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onItemTap(event){
+      const { pid } = event.currentTarget.dataset
+      wx.navigateTo({url: '/pages/detail/detail?pid='+pid})
+    }
   }
 })

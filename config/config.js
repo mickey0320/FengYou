@@ -1,4 +1,4 @@
 export default {
-    appkey: '1J267fOxZlLRCiAr',
+    appkey: 'uiAdgJGbDnomZeg2',
     apiBaseUrl: 'http://se.7yue.pro/v1/',
 }

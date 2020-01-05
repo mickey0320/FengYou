@@ -1,0 +1,21 @@
+<view bind:tap="onCellTap" class="container {{m.getCellStatus(cell.status).outer}}">
+  <view class="inner-container {{m.getCellStatus(cell.status).inner}}">
+    <text>{{cell.title}}</text>
+  </view>
+</view>
+<wxs module="m">
+  function getCellStatus(status){
+    if(status === 'selected') {
+      return {
+        outer: 's-outer',
+        inner: 's-inner'
+      }
+    }else if(status === 'forbidden'){
+      return {
+        outer: 'forbidden',
+        inner: ''
+      }
+    }
+  }
+  module.exports.getCellStatus = getCellStatus
+</wxs>
