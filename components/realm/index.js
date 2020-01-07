@@ -1,6 +1,7 @@
 import FenceGroup from "../model/fence-group";
 import Judger from "../model/judger";
 import Spu from "../../model/spu";
+import Cart from "../../model/cart";
 
 Component({
   /**
@@ -8,6 +9,7 @@ Component({
    */
   properties: {
     spu: Object,
+    orderWay: String,
   },
   lifetimes: {
     // 不能保证数据已经传递进来
@@ -23,9 +25,10 @@ Component({
       if (!spu) return
       if (Spu.isNoSpec(spu)) {
         this.processNoSpec(spu)
-        return
+      } else {
+        this.processHasSpec(spu)
       }
-      this.processHasSpec(spu)
+      this.triggerSpecChange()
     }
   },
   /**
@@ -43,6 +46,8 @@ Component({
     isSkuIntact: false,
     currentValues: [],
     missingKeys: [],
+    outStock: false,
+    purchaseCount: Cart.SKU_MIN_COUNT,
   },
 
   /**
@@ -54,6 +59,7 @@ Component({
         noSpec: true,
       })
       this.bindSkuData(spu.sku_list[0])
+      this.bindOutStock(spu.sku_list[0].stock)
     },
     processHasSpec(spu) {
       const fenceGroup = new FenceGroup(spu)
@@ -63,6 +69,7 @@ Component({
       const defaultSku = fenceGroup.getDefaultSku()
       if (defaultSku) {
         this.bindSkuData(defaultSku)
+        this.bindOutStock(defaultSku.stock)
       } else {
         this.bindSpuData()
       }
@@ -92,11 +99,25 @@ Component({
         stock,
       })
     },
-    bindTipData(){
+    bindTipData() {
       this.setData({
         isSkuIntact: this.data.judger.isSkuIntact(),
         currentValues: this.data.judger.getCurrentValues(),
         missingKeys: this.data.judger.getMissingKeys(),
+      })
+    },
+    bindOutStock(stock) {
+      this.setData({
+        outStock: stock < this.data.purchaseCount,
+      })
+    },
+    triggerSpecChange() {
+      const {currentValues, missingKeys, isSkuIntact} = this.data
+      this.triggerEvent('specchange', {
+        noSpec: Spu.isNoSpec(this.properties.spu),
+        currentValues,
+        missingKeys,
+        isSkuIntact
       })
     },
     onCellTap(event) {
@@ -104,12 +125,22 @@ Component({
       const judger = this.data.judger
       judger.judge(cell, x, y)
       const isSkuIntact = judger.isSkuIntact()
-      if(isSkuIntact){
-        const sku = judger.findSku()
+      if (isSkuIntact) {
+        const sku = judger.getFinalSku()
         this.bindSkuData(sku)
+        this.bindOutStock(sku.stock)
       }
       this.bindTipData()
       this.bindFenceGroupData(judger.fenceGroup)
+      this.triggerSpecChange()
+    },
+    onSelectCount(event) {
+      this.data.purchaseCount = event.detail.count
+      const {judger, purchaseCount} = this.data
+      if (judger.isSkuIntact()) {
+        const sku = judger.getFinalSku()
+        this.bindOutStock(sku.stock)
+      }
     }
   }
 })

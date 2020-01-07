@@ -1,4 +1,5 @@
 import Spu from "../../model/spu";
+import SaleExplain from "../../model/sale-explain";
 
 Page({
 
@@ -7,6 +8,9 @@ Page({
    */
   data: {
     spu: Object,
+    realmVisible: false,
+    spec: Object,
+    explain: Array,
   },
 
   /**
@@ -15,53 +19,39 @@ Page({
   onLoad: async function (options) {
     const { pid } = options
     const spu = await Spu.getDetail(pid)
+    const explain = await SaleExplain.getFixed()
     this.setData({
       spu,
+      explain,
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onGoHome(){
+    wx.switchTab({
+     url: '/pages/home/home',
+   })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  onGoToCart(){
+    wx.switchTab({
+      url: '/pages/cart/cart',
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  onAddToCart(event){
+    this.setData({
+      realmVisible: true,
+      orderWay: event.detail.orderWay,
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  onBuy(event){
+    this.setData({
+      realmVisible: true,
+      orderWay: event.detail.orderWay,
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  onSpecChange(event){
+    this.setData({
+      spec: event.detail,
+    })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
   /**
    * 用户点击右上角分享
    */

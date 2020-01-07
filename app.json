@@ -3,7 +3,10 @@
     "pages/home/home",
     "components/category-grid/index",
     "components/spu-scroll/index",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/cart/cart",
+    "pages/category/category",
+    "pages/my/my"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -11,11 +14,48 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
+  "tabBar": {
+    "borderStyle": "black",
+    "color": "#333333",
+    "selectedColor": "#333333",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/home/home",
+        "iconPath": "images/tabbar/home@dis.png",
+        "selectedIconPath": "images/tabbar/home.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "分类",
+        "iconPath": "images/tabbar/category@dis.png",
+        "selectedIconPath": "images/tabbar/category.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "images/tabbar/cart@dis.png",
+        "selectedIconPath": "images/tabbar/cart.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "images/tabbar/my@dis.png",
+        "selectedIconPath": "images/tabbar/my.png"
+      }
+    ]
+  },
   "usingComponents": {
     "l-grid": "/miniprogram_npm/lin-ui/grid/index",
     "l-grid-item": "/miniprogram_npm/lin-ui/grid-item/index",
     "l-price": "/miniprogram_npm/lin-ui/price/index",
-    "l-tag": "/miniprogram_npm/lin-ui/tag/index"
+    "l-icon": "/miniprogram_npm/lin-ui/icon/index",
+    "l-badge": "/miniprogram_npm/lin-ui/badge/index",
+    "l-popup": "/miniprogram_npm/lin-ui/popup/index",
+    "l-counter": "/miniprogram_npm/lin-ui/counter/index",
+    "l-tag": "/miniprogram_npm/lin-ui/tag/index",
+    "l-button": "/miniprogram_npm/lin-ui/button/index",
+    "s-counter": "/components/counter/index"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

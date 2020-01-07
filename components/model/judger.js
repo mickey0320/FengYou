@@ -29,9 +29,9 @@ class Judger {
     return this.skuPending.isIntact()
   }
 
-  findSku() {
+  getFinalSku() {
     const code = this.skuPending.getSkuCode()
-    const sku = this.fenceGroup.findSku(code)
+    const sku = this.fenceGroup.getFinalSku(code)
 
     return sku
   }

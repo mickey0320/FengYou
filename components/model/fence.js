@@ -25,6 +25,20 @@ class Fence {
       }
     })
   }
+  setFenceSketch(skuList){
+    this.cells.forEach(cell => {
+      cell.skuImg =this._getSketchImg(skuList, cell.id)
+    })
+  }
+  _getSketchImg(skuList, cellId){
+    for (let i = 0; i < skuList.length; i++) {
+      for (let j = 0; j < skuList[i].specs.length; j++) {
+        if(cellId === skuList[i].specs[j].value_id) {
+          return skuList[i].img
+        }
+      }
+    }
+  }
 }
 
 export default Fence

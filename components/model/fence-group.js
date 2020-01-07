@@ -18,6 +18,9 @@ class FenceGroup {
     AT.forEach((specs) => {
       const fence = this._createFence(specs)
       fence.init()
+      if(this._hasSketchFence() && this._isSketchFence(fence.id)){
+        fence.setFenceSketch(this.skuList)
+      }
       this.fences.push(fence)
     })
   }
@@ -55,7 +58,7 @@ class FenceGroup {
     this.fences[x].cells[y].status = status
   }
 
-  findSku(code){
+  getFinalSku(code){
     const spuId = this.spu.id
     return this.skuList.find(sku => sku.code === `${spuId}$${code}`)
   }
@@ -72,6 +75,12 @@ class FenceGroup {
 
   getCellCode(x,y){
     return this.fences[x].cells[y].getCellCode()
+  }
+  _hasSketchFence(){
+    return this.spu.sketch_spec_id ? true : false
+  }
+  _isSketchFence(fenceId){
+   return this.spu.sketch_spec_id === fenceId
   }
   _createFence(specs) {
     return new Fence(specs)

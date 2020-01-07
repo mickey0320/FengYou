@@ -1,3 +1,21 @@
 Page{
     background: #f5f5f5;
 }
+@font-face {
+    font-family: 'fengyou';  /* project id 1598779 */
+    src: url('//at.alicdn.com/t/font_1598779_wqdbqtkib7c.eot');
+    src: url('//at.alicdn.com/t/font_1598779_wqdbqtkib7c.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1598779_wqdbqtkib7c.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1598779_wqdbqtkib7c.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1598779_wqdbqtkib7c.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1598779_wqdbqtkib7c.svg#fengyou') format('svg');
+}
+
+.fengyou{
+    font-family: "fengyou" !important;
+    color:"#157658";
+}
+
+.l-icon-home:before{
+   content: '\e608';
+}
