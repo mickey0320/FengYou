@@ -1,5 +1,6 @@
 import Spu from "../../model/spu";
 import SaleExplain from "../../model/sale-explain";
+import {getWindowHeight} from "../../utils/system";
 
 Page({
 
@@ -11,6 +12,7 @@ Page({
     realmVisible: false,
     spec: Object,
     explain: Array,
+    h: Number,
   },
 
   /**
@@ -20,9 +22,11 @@ Page({
     const { pid } = options
     const spu = await Spu.getDetail(pid)
     const explain = await SaleExplain.getFixed()
+    const windowHeight = await getWindowHeight()
     this.setData({
       spu,
       explain,
+      h: windowHeight - 100,
     })
   },
   onGoHome(){

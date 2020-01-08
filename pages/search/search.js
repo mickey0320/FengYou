@@ -1,6 +1,4 @@
-// pages/cart/cart.js
-import {px2rpx} from "../../miniprogram_npm/lin-ui/utils/util";
-
+// pages/search/search.js
 Page({
 
   /**
@@ -14,14 +12,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.getSystemInfo({
-      success:(res)=> {
-        console.log(res);
-        this.setData({
-          h: 750/res.windowWidth*res.windowHeight
-        })
-      }
-    })
 
   },
 

@@ -6,7 +6,8 @@
     "pages/detail/detail",
     "pages/cart/cart",
     "pages/category/category",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -54,6 +55,8 @@
     "l-popup": "/miniprogram_npm/lin-ui/popup/index",
     "l-counter": "/miniprogram_npm/lin-ui/counter/index",
     "l-tag": "/miniprogram_npm/lin-ui/tag/index",
+    "l-segment": "/miniprogram_npm/lin-ui/segment/index",
+    "l-segment-item": "/miniprogram_npm/lin-ui/segment-item/index",
     "l-button": "/miniprogram_npm/lin-ui/button/index",
     "s-counter": "/components/counter/index"
   },

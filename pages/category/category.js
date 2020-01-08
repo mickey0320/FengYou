@@ -1,60 +1,72 @@
 // pages/category/category.js
+import {getWindowHeight, getWindowSize} from "../../utils/system";
+import Categories from "../../model/categories";
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    categories: null,
+    segmentHeight: Number,
+    currentBannerImg: String,
+    roots: Array,
+    currentSubs: Array,
+    defaultRootId: 2,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: async function (options) {
+    this.setSegmentHeight()
+    this.initSegmentData()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  async setSegmentHeight() {
+    const h = await getWindowHeight()
+    this.setData({
+      segmentHeight: h - 60 - 20 - 2
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  async initSegmentData() {
+    const categories = new Categories()
+    this.data.categories = categories
+    await categories.getAll()
+    const roots = categories.roots
+    const defaultRoot = this._getDefaultRoot(roots)
+    const currentSubs = categories.getSubsByRootId(defaultRoot.id)
+    this.setData({
+      roots,
+      currentSubs,
+      currentBannerImg: defaultRoot.img,
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  _getDefaultRoot(roots) {
+    let defaultRoot = roots.find(root => root.id === this.data.defaultRootId)
+    if(!defaultRoot) {
+      defaultRoot = roots[0]
+    }
+    return defaultRoot
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  onGotoSearch() {
+    wx.navigateTo({
+      url: '/pages/search/search',
+    })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  onChangeRoot(event){
+    const rootId = +event.detail.activeKey
+    const root = this.data.roots.find(root => root.id === rootId)
+    const currentSubs = this.data.categories.getSubsByRootId(rootId)
+    this.setData({
+      currentSubs,
+      currentBannerImg: root.img,
+    })
   },
 
   /**
