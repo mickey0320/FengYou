@@ -1,60 +1,60 @@
-// pages/search/search.js
+import Tag from "../../model/tag";
+import HistoryKeyword from "../../model/history-keyword";
+import Search from "../../model/search";
+const historyKeyword = new HistoryKeyword()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    historyTags: Array,
+    hotTags: Array,
+    isSearch: false,
+    items: Array,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: async function (options) {
+    const historyTags = historyKeyword.keywords
+    const hotTags = await Tag.getSearchTags()
+    this.setData({
+      hotTags,
+      historyTags,
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  async onSearch(event){
+    this.setData({
+      isSearch: true,
+    })
+    const keyword = event.detail.value || event.detail.name
+    if(!keyword.trim()){
+      return
+    }
+    historyKeyword.save(keyword)
+    this.setData({
+      historyTags: historyKeyword.getLocalKeywords(),
+    })
+    const data = await Search.search(keyword)
+    if(data.accumulator.length > 0){
+      this.setData({
+        items: data.accumulator,
+      })
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  onCancel(){
+    this.setData({
+      isSearch: false,
+      items: [],
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  onDeleteHistoryTag(){
+    historyKeyword.clear()
+    this.setData({
+      historyTags: [],
+    })
   },
 
   /**
